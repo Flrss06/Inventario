@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecostock | Inventario a la medida de tu negocio</title>
+    <!-- Fuente moderna e Iconos desde CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navegación Superior -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <i class="bi bi-box-seam-fill"></i> Ecostock
+            </a>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Iniciar sesión</a>
+                <a href="register.html" class="btn btn-primary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Sección Principal) -->
+    <header class="hero">
+        <div class="hero-container">
+            <span class="badge"><i class="bi bi-shield-check"></i> Inventario para cualquier negocio</span>
+            <h1>Un inventario que se adapta <span class="highlight">a tu negocio.</span></h1>
+            <p>Dinos qué vendes y te damos un panel listo para tu giro: comida, ropa, tenis, refacciones y más. Gratis desde el primer día.</p>
+
+            <div class="hero-cta">
+                <a href="register.html" class="btn btn-primary btn-lg">Crear mi cuenta gratis <i class="bi bi-arrow-right"></i></a>
+                <a href="#planes" class="btn btn-secondary btn-lg">Ver planes</a>
+            </div>
+
+            <!-- Métricas / Prueba Social -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>5</h3>
+                    <p>Giros de negocio listos</p>
+                </div>
+                <div class="stat-card">
+                    <h3>2</h3>
+                    <p>Plantillas por giro</p>
+                </div>
+                <div class="stat-card">
+                    <h3>$0</h3>
+                    <p>Para empezar</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Giros de negocio -->
+        <section class="features-section">
+            <div class="section-header">
+                <h2>Un panel distinto para cada tipo de negocio</h2>
+                <p>Los campos, alertas y reportes cambian según lo que vendes.</p>
+            </div>
+
+            <div class="grid-cards">
+                <a href="register.html?tipo=comida" class="card giro" style="--c:#208b0b">
+                    <div class="icon-box"><i class="bi bi-egg-fried"></i></div>
+                    <h3>Alimentos y restaurantes</h3>
+                    <p>Caducidades, lotes y mermas bajo control.</p>
+                    <span class="ver">Empezar <i class="bi bi-arrow-right"></i></span>
+                </a>
+
+                <a href="register.html?tipo=ropa" class="card giro" style="--c:#c026d3">
+                    <div class="icon-box"><i class="bi bi-bag-heart"></i></div>
+                    <h3>Ropa y boutiques</h3>
+                    <p>Existencias por talla, color y temporada.</p>
+                    <span class="ver">Empezar <i class="bi bi-arrow-right"></i></span>
+                </a>
+
+                <a href="register.html?tipo=calzado" class="card giro" style="--c:#ea580c">
+                    <div class="icon-box"><i class="bi bi-person-walking"></i></div>
+                    <h3>Tenis y calzado</h3>
+                    <p>Pares por modelo y talla, listos para resurtir.</p>
+                    <span class="ver">Empezar <i class="bi bi-arrow-right"></i></span>
+                </a>
+
+                <a href="register.html?tipo=refacciones" class="card giro" style="--c:#2563eb">
+                    <div class="icon-box"><i class="bi bi-wrench-adjustable"></i></div>
+                    <h3>Refacciones</h3>
+                    <p>Búsqueda por número de parte y vehículo compatible.</p>
+                    <span class="ver">Empezar <i class="bi bi-arrow-right"></i></span>
+                </a>
+
+                <a href="register.html?tipo=general" class="card giro" style="--c:#0f766e">
+                    <div class="icon-box"><i class="bi bi-shop"></i></div>
+                    <h3>Cualquier otro negocio</h3>
+                    <p>Papelerías, ferreterías, farmacias y más.</p>
+                    <span class="ver">Empezar <i class="bi bi-arrow-right"></i></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Cómo funciona -->
+        <section class="how-section">
+            <div class="section-header">
+                <h2>¿Cómo funciona?</h2>
+                <p>En menos de dos minutos tienes tu panel funcionando.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <h3>Cuéntanos de tu empresa</h3>
+                    <p>Nombre, a qué se dedica y qué tipo de negocio es.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <h3>Elige tu plantilla</h3>
+                    <p>Tienes dos diseños para tu giro y puedes cambiar entre ellos cuando quieras.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <h3>Pide cambios si los necesitas</h3>
+                    <p>¿Te falta un apartado? Con un plan de pago lo agregamos por ti.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planes -->
+        <section id="planes" class="pricing-section">
+            <div class="section-header">
+                <h2>Gratis para empezar, a tu medida cuando lo necesites</h2>
+                <p>Las plantillas base son gratis para siempre. Pagas solo por los cambios.</p>
+            </div>
+
+            <div class="planes">
+                <div class="plan">
+                    <h3>Gratis</h3>
+                    <div class="plan-precio">$0 <small>para siempre</small></div>
+                    <ul>
+                        <li><i class="bi bi-check2"></i> 2 plantillas listas para tu giro</li>
+                        <li><i class="bi bi-check2"></i> Inventario, alertas y reportes base</li>
+                        <li><i class="bi bi-check2"></i> Cambia de plantilla cuando quieras</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-secondary btn-block">Empezar gratis</a>
+                </div>
+                <div class="plan destacado">
+                    <span class="plan-tag">Más popular</span>
+                    <h3>Pro</h3>
+                    <div class="plan-precio">$149 <small>MXN / mes</small></div>
+                    <ul>
+                        <li><i class="bi bi-check2"></i> Todo lo del plan Gratis</li>
+                        <li><i class="bi bi-check2"></i> Pide hasta 3 cambios pequeños al mes</li>
+                        <li><i class="bi bi-check2"></i> Agrega campos o apartados a tu plantilla</li>
+                    </ul>
+                    <a href="register.html" class="btn btn-primary btn-block">Empezar</a>
+                </div>
+                <div class="plan">
+                    <h3>A tu medida</h3>
+                    <div class="plan-precio">Desde $499 <small>MXN / mes</small></div>
+                    <ul>
+                        <li><i class="bi bi-check2"></i> Todo lo del plan Pro</li>
+                        <li><i class="bi bi-check2"></i> Dashboard diseñado a tu gusto</li>
+                        <li><i class="bi bi-check2"></i> Cambios sin límite y atención prioritaria</li>
+                    </ul>
+                    <a href="#contacto" class="btn btn-secondary btn-block">Hablar con nosotros</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto -->
+        <section id="contacto" class="contact-section">
+            <div class="contact-card">
+                <h2>¿Quieres un panel a tu medida?</h2>
+                <p>Déjanos tus datos y te contactamos para entender lo que necesita tu negocio.</p>
+
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <input type="text" placeholder="Tu nombre o empresa" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Quiero que me contacten</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 Ecostock. Todos los derechos reservados.</p>
+            <p class="author">Diseñado por <strong>Chris Flores</strong></p>
+        </div>
+    </footer>
+
+</body>
+</html>
