@@ -1,0 +1,52 @@
+import type { Giro } from '@/types';
+
+export const ropa: Giro = {
+    id: 'ropa',
+    nombre: 'Ropa y boutiques',
+    lema: 'Existencias por talla, color y temporada.',
+    descripcion: 'Tiendas de ropa, boutiques y accesorios.',
+    icono: 'bi-bag-heart',
+    color: '#c026d3',
+    minimo: 2,
+    agruparPor: 'categoria',
+    subtitulo: ['talla', 'color'],
+    buscar: 'Buscar prenda, talla o color...',
+    kpis: ['unidades', 'modelos', 'agotados', 'valor'],
+    etiquetas: { unidades: 'Prendas en stock', modelos: 'Prendas distintas', agotados: 'Tallas agotadas' },
+    campos: [
+        { key: 'nombre', label: 'Prenda', type: 'text', required: true },
+        { key: 'categoria', label: 'Categoría', type: 'select', options: ['Playeras', 'Pantalones', 'Vestidos', 'Chamarras', 'Accesorios'] },
+        { key: 'talla', label: 'Talla', type: 'select', options: ['XS', 'S', 'M', 'L', 'XL', 'Unitalla'], required: true },
+        { key: 'color', label: 'Color', type: 'text' },
+        { key: 'temporada', label: 'Temporada', type: 'select', options: ['Primavera-Verano', 'Otoño-Invierno', 'Todo el año'] },
+        { key: 'cantidad', label: 'Cantidad', type: 'number', required: true },
+        { key: 'precio', label: 'Precio de venta', type: 'money' },
+        { key: 'minimo', label: 'Stock mínimo', type: 'number', tabla: false },
+    ],
+    ejemplos: () => [
+        { nombre: 'Playera básica', categoria: 'Playeras', talla: 'S', color: 'Blanco', temporada: 'Todo el año', cantidad: 12, precio: 199 },
+        { nombre: 'Playera básica', categoria: 'Playeras', talla: 'M', color: 'Blanco', temporada: 'Todo el año', cantidad: 2, precio: 199 },
+        { nombre: 'Playera básica', categoria: 'Playeras', talla: 'L', color: 'Blanco', temporada: 'Todo el año', cantidad: 0, precio: 199 },
+        { nombre: 'Jeans slim', categoria: 'Pantalones', talla: 'M', color: 'Azul', temporada: 'Todo el año', cantidad: 8, precio: 549 },
+        { nombre: 'Jeans slim', categoria: 'Pantalones', talla: 'L', color: 'Azul', temporada: 'Todo el año', cantidad: 3, precio: 549 },
+        { nombre: 'Vestido floral', categoria: 'Vestidos', talla: 'S', color: 'Rosa', temporada: 'Primavera-Verano', cantidad: 5, precio: 699 },
+        { nombre: 'Vestido floral', categoria: 'Vestidos', talla: 'M', color: 'Rosa', temporada: 'Primavera-Verano', cantidad: 1, precio: 699 },
+        { nombre: 'Chamarra de mezclilla', categoria: 'Chamarras', talla: 'M', color: 'Azul', temporada: 'Otoño-Invierno', cantidad: 4, precio: 899 },
+        { nombre: 'Chamarra de mezclilla', categoria: 'Chamarras', talla: 'L', color: 'Azul', temporada: 'Otoño-Invierno', cantidad: 6, precio: 899 },
+        { nombre: 'Gorra bordada', categoria: 'Accesorios', talla: 'Unitalla', color: 'Negro', temporada: 'Todo el año', cantidad: 15, precio: 249 },
+    ],
+    plantillas: {
+        a: {
+            nombre: 'Tienda por tallas',
+            descripcion: 'Matriz de prendas por talla para detectar huecos antes de que se agoten.',
+            layout: 'sidebar',
+            widgets: [{ w: 'kpis' }, { w: 'tallas' }, { w: 'alertas' }, { w: 'categorias' }, { w: 'tabla' }],
+        },
+        b: {
+            nombre: 'Catálogo',
+            descripcion: 'Tus prendas como en vitrina, con existencias por temporada.',
+            layout: 'topbar',
+            widgets: [{ w: 'kpis' }, { w: 'tarjetas' }, { w: 'bajoStock' }, { w: 'categorias', por: 'temporada' }],
+        },
+    },
+};

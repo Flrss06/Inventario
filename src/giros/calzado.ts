@@ -1,0 +1,51 @@
+import type { Giro } from '@/types';
+
+export const calzado: Giro = {
+    id: 'calzado',
+    nombre: 'Tenis y calzado',
+    lema: 'Pares por modelo y talla, listos para resurtir.',
+    descripcion: 'Zapaterías, tiendas de tenis y sneakers.',
+    icono: 'bi-person-walking',
+    color: '#ea580c',
+    minimo: 1,
+    agruparPor: 'marca',
+    subtitulo: ['marca', 'talla', 'color'],
+    buscar: 'Buscar modelo, marca o talla...',
+    kpis: ['unidades', 'modelos', 'agotados', 'valor'],
+    etiquetas: { unidades: 'Pares en stock', modelos: 'Modelos distintos', agotados: 'Tallas agotadas' },
+    campos: [
+        { key: 'nombre', label: 'Modelo', type: 'text', required: true },
+        { key: 'marca', label: 'Marca', type: 'text' },
+        { key: 'categoria', label: 'Estilo', type: 'select', options: ['Running', 'Casual', 'Basketball', 'Skate', 'Formal'] },
+        { key: 'talla', label: 'Talla (MX)', type: 'select', options: ['23', '24', '25', '26', '27', '28', '29'], required: true },
+        { key: 'color', label: 'Color', type: 'text' },
+        { key: 'cantidad', label: 'Pares', type: 'number', required: true },
+        { key: 'precio', label: 'Precio de venta', type: 'money' },
+        { key: 'minimo', label: 'Stock mínimo', type: 'number', tabla: false },
+    ],
+    ejemplos: () => [
+        { nombre: 'Runner Pro', marca: 'Veloz', categoria: 'Running', talla: '25', color: 'Negro', cantidad: 5, precio: 1899 },
+        { nombre: 'Runner Pro', marca: 'Veloz', categoria: 'Running', talla: '26', color: 'Negro', cantidad: 2, precio: 1899 },
+        { nombre: 'Runner Pro', marca: 'Veloz', categoria: 'Running', talla: '27', color: 'Negro', cantidad: 0, precio: 1899 },
+        { nombre: 'Street Classic', marca: 'Urbano', categoria: 'Casual', talla: '24', color: 'Blanco', cantidad: 6, precio: 1299 },
+        { nombre: 'Street Classic', marca: 'Urbano', categoria: 'Casual', talla: '26', color: 'Blanco', cantidad: 4, precio: 1299 },
+        { nombre: 'Street Classic', marca: 'Urbano', categoria: 'Casual', talla: '28', color: 'Blanco', cantidad: 1, precio: 1299 },
+        { nombre: 'Court High', marca: 'Apex', categoria: 'Basketball', talla: '27', color: 'Rojo', cantidad: 3, precio: 2299 },
+        { nombre: 'Court High', marca: 'Apex', categoria: 'Basketball', talla: '28', color: 'Rojo', cantidad: 2, precio: 2299 },
+        { nombre: 'Skate Low', marca: 'Urbano', categoria: 'Skate', talla: '25', color: 'Gris', cantidad: 7, precio: 999 },
+    ],
+    plantillas: {
+        a: {
+            nombre: 'Piso de venta',
+            descripcion: 'Pares por modelo y talla, con lo que hay que resurtir.',
+            layout: 'sidebar',
+            widgets: [{ w: 'kpis' }, { w: 'tallas' }, { w: 'bajoStock' }, { w: 'categorias' }, { w: 'tabla' }],
+        },
+        b: {
+            nombre: 'Vitrina',
+            descripcion: 'Tus modelos en tarjetas y existencias por estilo.',
+            layout: 'topbar',
+            widgets: [{ w: 'kpis' }, { w: 'tarjetas' }, { w: 'alertas' }, { w: 'categorias', por: 'categoria' }],
+        },
+    },
+};

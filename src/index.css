@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Colores y fuente de la marca: úsalos como bg-primary, text-ink, text-muted, etc. */
+@theme {
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --color-primary: #208b0b;
+    --color-ink: #0f172a;
+    --color-body: #334155;
+    --color-muted: #64748b;
+    --color-page: #f8fafc;
+}
+
+/* "accent" es el color del giro activo. Cada pantalla puede cambiarlo con style={{ '--accent': color }}
+   y todas las clases bg-accent, text-accent, border-accent, bg-accent/10... lo siguen. */
+@theme inline {
+    --color-accent: var(--accent, #208b0b);
+}
+
+body {
+    @apply bg-page font-sans text-body antialiased;
+}
