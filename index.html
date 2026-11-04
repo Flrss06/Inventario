@@ -3,12 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecostock | Inventario a la medida de tu negocio</title>
+    <title>Kiubo | El inventario que se adapta a tu negocio</title>
+    <meta name="description" content="Kiubo: inventario inteligente para cualquier negocio, con paneles a tu medida y un asistente de IA que te dice qué comprar.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Pantalla de carga: se muestra antes de que cargue React y main.tsx la desvanece. */
+        #splash {
+            position: fixed; inset: 0; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+            background: radial-gradient(circle at 50% 40%, #1d1650 0%, #0b0920 70%);
+            transition: opacity .6s ease, visibility .6s ease;
+        }
+        #splash.oculto { opacity: 0; visibility: hidden; }
+        #splash svg { width: 76px; height: 76px; animation: kiubo-girar 1.4s cubic-bezier(.6,0,.4,1) infinite; filter: drop-shadow(0 12px 30px rgba(108,71,255,.55)); }
+        #splash span {
+            font: 800 28px/1 "Plus Jakarta Sans", system-ui, sans-serif; letter-spacing: .02em; color: #fff;
+            animation: kiubo-aparecer .8s ease .15s both;
+        }
+        @keyframes kiubo-girar { 0%,15% { transform: rotate(0) scale(1) } 50% { transform: rotate(180deg) scale(.82) } 85%,100% { transform: rotate(360deg) scale(1) } }
+        @keyframes kiubo-aparecer { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+        @media (prefers-reduced-motion: reduce) { #splash svg, #splash span { animation: none } }
+    </style>
 </head>
 <body>
+    <div id="splash" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+            <path d="M32 5 57 19 32 33 7 19Z" fill="#8b6cff" />
+            <path d="M7 19 32 33v26L7 45Z" fill="#5a36f0" />
+            <path d="M57 19 32 33v26l25-14Z" fill="#22d3ee" />
+            <path d="M32 33v26M7 19l25 14 25-14" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.2" />
+        </svg>
+        <span>Kiubo</span>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 </body>

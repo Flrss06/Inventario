@@ -37,13 +37,13 @@ export const refacciones: Giro = {
             nombre: 'Mostrador',
             descripcion: 'Búsqueda rápida por número de parte o vehículo para atender al cliente.',
             layout: 'sidebar',
-            widgets: [{ w: 'kpis' }, { w: 'tabla' }, { w: 'alertas' }, { w: 'categorias', por: 'vehiculo' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'tabla' }, { w: 'alertas' }, { w: 'categorias', por: 'vehiculo' }],
         },
         b: {
             nombre: 'Almacén por ubicación',
             descripcion: 'Existencias por estante y piezas por resurtir.',
             layout: 'topbar',
-            widgets: [{ w: 'kpis' }, { w: 'categorias', por: 'ubicacion' }, { w: 'bajoStock' }, { w: 'tarjetas' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'categorias', por: 'ubicacion' }, { w: 'bajoStock' }, { w: 'tarjetas' }],
         },
     },
 };

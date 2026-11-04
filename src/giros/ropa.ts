@@ -40,13 +40,13 @@ export const ropa: Giro = {
             nombre: 'Tienda por tallas',
             descripcion: 'Matriz de prendas por talla para detectar huecos antes de que se agoten.',
             layout: 'sidebar',
-            widgets: [{ w: 'kpis' }, { w: 'tallas' }, { w: 'alertas' }, { w: 'categorias' }, { w: 'tabla' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'tallas' }, { w: 'alertas' }, { w: 'categorias' }, { w: 'tabla' }],
         },
         b: {
             nombre: 'Catálogo',
             descripcion: 'Tus prendas como en vitrina, con existencias por temporada.',
             layout: 'topbar',
-            widgets: [{ w: 'kpis' }, { w: 'tarjetas' }, { w: 'bajoStock' }, { w: 'categorias', por: 'temporada' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'tarjetas' }, { w: 'bajoStock' }, { w: 'categorias', por: 'temporada' }],
         },
     },
 };

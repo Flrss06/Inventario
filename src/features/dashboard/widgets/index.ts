@@ -7,6 +7,7 @@ import type { ComponentType } from 'react';
 import type { Giro, WidgetId, WidgetSpec } from '@/types';
 import { WIDGET_META } from '@/data/widgets';
 import { campoDe } from '../lib/inventario';
+import { vocabularioDe } from '@/giros/vocabulario';
 import type { WidgetProps } from './tipos';
 import { KpisWidget } from './KpisWidget';
 import { TablaWidget } from './TablaWidget';
@@ -16,6 +17,7 @@ import { BajoStockWidget } from './BajoStockWidget';
 import { CategoriasWidget } from './CategoriasWidget';
 import { CaducidadWidget } from './CaducidadWidget';
 import { TallasWidget } from './TallasWidget';
+import { VentasWidget } from './VentasWidget';
 
 export const WIDGETS: Record<WidgetId, ComponentType<WidgetProps>> = {
     kpis: KpisWidget,
@@ -26,10 +28,16 @@ export const WIDGETS: Record<WidgetId, ComponentType<WidgetProps>> = {
     categorias: CategoriasWidget,
     caducidad: CaducidadWidget,
     tallas: TallasWidget,
+    ventas: VentasWidget,
 };
 
 export function tituloWidget(spec: WidgetSpec, giro: Giro) {
     if (spec.titulo) return spec.titulo;
+    const v = vocabularioDe(giro);
+    if (spec.w === 'ventas') return v.salidas;
+    // Un negocio que usa insumos los pide a proveedores; no los "resurte" para vender.
+    if (v.tipo === 'consumo' && spec.w === 'bajoStock') return 'Por pedir';
+    if (v.tipo === 'consumo' && (spec.w === 'tabla' || spec.w === 'tarjetas')) return 'Insumos';
     if (spec.w === 'categorias') {
         const campo = campoDe(giro, spec.por ?? giro.agruparPor);
         return campo ? `Por ${campo.label.toLowerCase()}` : WIDGET_META.categorias.titulo;

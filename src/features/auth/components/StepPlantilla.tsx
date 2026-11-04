@@ -1,8 +1,8 @@
 import type { FormEvent } from 'react';
 import type { Giro, PlantillaId } from '@/types';
 import { Button } from '@/components/ui/Button';
-import { OpcionCard } from './OpcionCard';
-import { PlantillaPreview } from './PlantillaPreview';
+import { OpcionCard } from '@/components/OpcionCard';
+import { PlantillaPreview } from '@/components/PlantillaPreview';
 
 interface Props {
     giro: Giro;
@@ -17,7 +17,7 @@ export function StepPlantilla({ giro, onListo, onAtras }: Props) {
     }
 
     return (
-        <form onSubmit={enviar}>
+        <form onSubmit={enviar} className="animate-entrada">
             <p className="text-sm text-muted">
                 Preparamos dos plantillas para tu giro. Puedes cambiar entre ellas cuando quieras desde tu panel.
             </p>

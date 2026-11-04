@@ -39,13 +39,13 @@ export const calzado: Giro = {
             nombre: 'Piso de venta',
             descripcion: 'Pares por modelo y talla, con lo que hay que resurtir.',
             layout: 'sidebar',
-            widgets: [{ w: 'kpis' }, { w: 'tallas' }, { w: 'bajoStock' }, { w: 'categorias' }, { w: 'tabla' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'tallas' }, { w: 'bajoStock' }, { w: 'categorias' }, { w: 'tabla' }],
         },
         b: {
             nombre: 'Vitrina',
             descripcion: 'Tus modelos en tarjetas y existencias por estilo.',
             layout: 'topbar',
-            widgets: [{ w: 'kpis' }, { w: 'tarjetas' }, { w: 'alertas' }, { w: 'categorias', por: 'categoria' }],
+            widgets: [{ w: 'kpis' }, { w: 'ventas' }, { w: 'tarjetas' }, { w: 'alertas' }, { w: 'categorias', por: 'categoria' }],
         },
     },
 };

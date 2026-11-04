@@ -5,6 +5,8 @@ import { SinProductos } from '../components/Estados';
 import { WidgetCard } from '../components/WidgetCard';
 import type { WidgetProps } from './tipos';
 
+const EN_RESUMEN = 4;
+
 const CELDA = {
     stock: 'bg-accent/10 text-accent font-bold',
     poco: 'bg-amber-100 text-amber-700 font-bold',
@@ -17,25 +19,28 @@ function Celda({ tipo, children }: { tipo: keyof typeof CELDA; children: string 
 }
 
 /** Matriz modelo × talla. Requiere que el giro tenga un campo "talla" con opciones. */
-export function TallasWidget({ seccion }: WidgetProps) {
+export function TallasWidget(props: WidgetProps) {
     const { giro, items } = useDashboard();
+    const detalle = props.modo === 'detalle';
     const tallas = campoDe(giro, 'talla')?.options ?? [];
-    const modelos = [...new Set(items.map(i => i.nombre))];
+    const todos = [...new Set(items.map(i => i.nombre))];
+    const modelos = detalle ? todos : todos.slice(0, EN_RESUMEN);
+    const total = (filtro: (i: (typeof items)[number]) => boolean) => items.filter(filtro).reduce((s, i) => s + cantidadDe(i), 0);
+    const th = 'border-b border-slate-200 px-3 py-2.5 text-xs font-semibold text-muted uppercase';
 
     return (
-        <WidgetCard seccion={seccion}>
-            {modelos.length === 0 ? (
+        <WidgetCard {...props} verTodo={todos.length > EN_RESUMEN ? `Ver los ${todos.length} modelos` : undefined}>
+            {todos.length === 0 ? (
                 <SinProductos />
             ) : (
                 <>
-                    <div className="overflow-x-auto">
+                    <div className="-mx-2 overflow-x-auto px-2">
                         <table className="w-full border-collapse text-sm">
                             <thead>
                                 <tr>
-                                    <th className="border-b border-slate-200 px-3 py-2.5 text-left text-xs text-muted uppercase">{campoDe(giro, 'nombre')?.label}</th>
-                                    {tallas.map(t => (
-                                        <th key={t} className="border-b border-slate-200 px-3 py-2.5 text-center text-xs text-muted uppercase">{t}</th>
-                                    ))}
+                                    <th className={`${th} text-left`}>{campoDe(giro, 'nombre')?.label}</th>
+                                    {tallas.map(t => <th key={t} className={`${th} text-center`}>{t}</th>)}
+                                    {detalle && <th className={`${th} text-right`}>Total</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,8 +57,16 @@ export function TallasWidget({ seccion }: WidgetProps) {
                                                 </td>
                                             );
                                         })}
+                                        {detalle && <td className="border-b border-slate-100 px-3 py-3 text-right font-bold text-ink">{num(total(i => i.nombre === modelo))}</td>}
                                     </tr>
                                 ))}
+                                {detalle && (
+                                    <tr className="bg-slate-50">
+                                        <td className="px-3 py-3 font-bold text-ink">Total por talla</td>
+                                        {tallas.map(t => <td key={t} className="px-3 py-3 text-center font-semibold">{num(total(i => String(i.talla) === t))}</td>)}
+                                        <td className="px-3 py-3 text-right font-extrabold text-ink">{num(total(() => true))}</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

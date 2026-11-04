@@ -1,4 +1,5 @@
 import { useDashboard } from '../context/DashboardContext';
+import { DisenarModal } from './DisenarModal';
 import { ItemFormModal } from './ItemFormModal';
 import { PlanesModal } from './PlanesModal';
 import { SolicitudModal } from './SolicitudModal';
@@ -16,5 +17,7 @@ export function ModalHost() {
         case 'solicitud':
             // La key limpia el formulario después de enviar una solicitud.
             return <SolicitudModal key={negocio.solicitudes.length} aviso={modal.aviso} />;
+        case 'disenar':
+            return <DisenarModal />;
     }
 }

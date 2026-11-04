@@ -3,7 +3,7 @@ import type { GiroId } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Field, claseInput } from '@/components/ui/Field';
 import { LISTA_GIROS } from '@/giros';
-import { OpcionCard } from './OpcionCard';
+import { OpcionCard } from '@/components/OpcionCard';
 
 export interface DatosNegocio {
     empresa: string;
@@ -29,7 +29,7 @@ export function StepNegocio({ inicial, onListo, onAtras }: Props) {
     }
 
     return (
-        <form onSubmit={enviar}>
+        <form onSubmit={enviar} className="animate-entrada">
             <Field label="Nombre de tu empresa">
                 <input name="empresa" type="text" autoComplete="organization" required autoFocus defaultValue={inicial?.empresa} className={claseInput} />
             </Field>

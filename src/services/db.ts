@@ -2,9 +2,22 @@
 // Cuando exista un backend (Firebase, Supabase, API propia...), solo hay que
 // reemplazar las funciones de este archivo; el resto de la app no cambia.
 
-import type { Item, Negocio, Usuario } from '@/types';
+import type { Item, Movimiento, Negocio, Usuario } from '@/types';
 
-const PREFIJO = 'ecostock.';
+const PREFIJO = 'kiubo.';
+const PREFIJO_ANTERIOR = 'ecostock.';
+
+// Una sola vez: pasa los datos guardados con el nombre anterior al nuevo, para no perder cuentas.
+try {
+    for (const clave of Object.keys(localStorage)) {
+        if (!clave.startsWith(PREFIJO_ANTERIOR)) continue;
+        const nueva = PREFIJO + clave.slice(PREFIJO_ANTERIOR.length);
+        if (localStorage.getItem(nueva) === null) localStorage.setItem(nueva, localStorage.getItem(clave) ?? '');
+        localStorage.removeItem(clave);
+    }
+} catch {
+    // Sin acceso a localStorage no hay nada que migrar.
+}
 
 function leer<T>(clave: string, porDefecto: T): T {
     try {
@@ -43,13 +56,21 @@ export async function verificarCredenciales(correo: string, pass: string) {
     return Boolean(cuenta) && cuenta.pass === (await hashPass(pass));
 }
 
-export async function crearCuenta(datos: { nombre: string; correo: string; pass: string; negocio: Negocio; items: Item[] }) {
+export async function crearCuenta(datos: {
+    nombre: string;
+    correo: string;
+    pass: string;
+    negocio: Negocio;
+    items: Item[];
+    movimientos: Movimiento[];
+}) {
     const correo = normalizarCorreo(datos.correo);
     const usuarios = leer<Record<string, Usuario>>('usuarios', {});
     usuarios[correo] = { nombre: datos.nombre, pass: await hashPass(datos.pass) };
     return escribir('usuarios', usuarios)
         && guardarNegocio(correo, datos.negocio)
         && guardarItems(correo, datos.items)
+        && guardarMovimientos(correo, datos.movimientos)
         && iniciarSesion(correo);
 }
 
@@ -71,3 +92,10 @@ export const guardarNegocio = (correo: string, negocio: Negocio) => escribir(`ne
 
 export const cargarItems = (correo: string) => leer<Item[]>(`items:${correo}`, []);
 export const guardarItems = (correo: string, items: Item[]) => escribir(`items:${correo}`, items);
+
+// Solo guardamos los últimos 90 días de movimientos para no llenar el almacenamiento del navegador.
+export const cargarMovimientos = (correo: string) => leer<Movimiento[]>(`movimientos:${correo}`, []);
+export function guardarMovimientos(correo: string, movimientos: Movimiento[]) {
+    const limite = Date.now() - 90 * 86400000;
+    return escribir(`movimientos:${correo}`, movimientos.filter(m => new Date(m.fecha).getTime() >= limite));
+}

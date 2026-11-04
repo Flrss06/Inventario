@@ -20,10 +20,17 @@ export function DashboardHeader() {
     return (
         <div className="mb-6 flex flex-wrap items-end justify-between gap-6">
             <div>
-                <span className="mb-2.5 inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
-                    <i className={`bi ${giro.icono}`} /> {giro.nombre}
-                </span>
-                <h1 className="text-3xl leading-tight font-extrabold text-ink">{negocio.nombre}</h1>
+                <div className="mb-2.5 flex flex-wrap gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-bold text-accent">
+                        <i className={`bi ${giro.icono}`} /> {giro.nombre}
+                    </span>
+                    {negocio.giroPersonalizado && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-linear-to-r from-violet-500 to-cyan-400 px-3 py-1 text-xs font-bold text-white">
+                            <i className="bi bi-stars" /> Panel hecho a tu medida
+                        </span>
+                    )}
+                </div>
+                <h1 className="text-3xl leading-tight font-extrabold tracking-tight text-ink sm:text-4xl">{negocio.nombre}</h1>
                 {negocio.descripcion && <p className="max-w-xl text-muted">{negocio.descripcion}</p>}
             </div>
 

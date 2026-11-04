@@ -1,5 +1,5 @@
 {
-  "name": "ecostock",
+  "name": "kiubo",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0",
     "bootstrap-icons": "^1.13.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

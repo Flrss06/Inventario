@@ -12,3 +12,12 @@ createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
     </StrictMode>,
 );
+
+// Deja ver el logo de carga al menos un instante y luego lo desvanece.
+const splash = document.getElementById('splash');
+if (splash) {
+    setTimeout(() => {
+        splash.classList.add('oculto');
+        setTimeout(() => splash.remove(), 700);
+    }, Math.max(0, 900 - performance.now()));
+}

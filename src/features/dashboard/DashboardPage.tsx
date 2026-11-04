@@ -1,14 +1,16 @@
 import { useEffect, type CSSProperties } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { WIDGET_META } from '@/data/widgets';
 import { cargarNegocio, sesionActual } from '@/services/db';
 import { DashboardProvider } from './context/DashboardProvider';
 import { useDashboard } from './context/DashboardContext';
-import { DashboardHeader } from './components/DashboardHeader';
-import { EjemplosBanner } from './components/EjemplosBanner';
 import { SidebarLayout } from './layouts/SidebarLayout';
 import { TopbarLayout } from './layouts/TopbarLayout';
 import { ModalHost } from './modals/ModalHost';
-import { WIDGETS, tituloWidget } from './widgets';
+import { AsistentePage } from './pages/AsistentePage';
+import { ResumenPage } from './pages/ResumenPage';
+import { SeccionPage } from './pages/SeccionPage';
+import { tituloWidget } from './widgets';
 import type { Seccion } from './widgets/tipos';
 
 export function DashboardPage() {
@@ -23,27 +25,33 @@ export function DashboardPage() {
     );
 }
 
-/** Arma la plantilla elegida: diseño (lateral o superior) + sus apartados en orden. */
+/** Arma la plantilla elegida: diseño (lateral o superior) y una página por apartado. */
 function Panel() {
     const { negocio, giro, plantilla } = useDashboard();
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        document.title = `${negocio.nombre} | Ecostock`;
+        document.title = `${negocio.nombre} | Kiubo`;
     }, [negocio.nombre]);
 
-    const secciones: Seccion[] = plantilla.widgets.map((spec, n) => ({ id: `w-${n}`, spec, titulo: tituloWidget(spec, giro) }));
+    useEffect(() => {
+        window.scrollTo({ top: 0 });
+    }, [pathname]);
+
+    const secciones: Seccion[] = plantilla.widgets
+        .filter(spec => spec.w !== 'kpis')
+        .map((spec, n) => ({ id: `w-${n}`, spec, titulo: tituloWidget(spec, giro), ruta: `/panel/${WIDGET_META[spec.w].ruta}` }));
     const Layout = plantilla.layout === 'sidebar' ? SidebarLayout : TopbarLayout;
 
     return (
         <div style={{ '--accent': giro.color } as CSSProperties}>
             <Layout secciones={secciones}>
-                <DashboardHeader />
-                <EjemplosBanner />
-                <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
-                    {secciones.map(seccion => {
-                        const Widget = WIDGETS[seccion.spec.w];
-                        return <Widget key={seccion.id} seccion={seccion} />;
-                    })}
+                <div key={pathname} className="animate-entrada">
+                    <Routes>
+                        <Route index element={<ResumenPage secciones={secciones} />} />
+                        <Route path="ia" element={<AsistentePage />} />
+                        <Route path=":ruta" element={<SeccionPage secciones={secciones} />} />
+                    </Routes>
                 </div>
             </Layout>
             <ModalHost />

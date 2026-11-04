@@ -1,21 +1,89 @@
 @import "tailwindcss";
 
-/* Colores y fuente de la marca: úsalos como bg-primary, text-ink, text-muted, etc. */
+/* Paleta de Kiubo: úsala como bg-primary, text-ink, text-muted, bg-noche, etc. */
 @theme {
     --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-    --color-primary: #208b0b;
-    --color-ink: #0f172a;
-    --color-body: #334155;
-    --color-muted: #64748b;
-    --color-page: #f8fafc;
+    --color-primary: #6c47ff;
+    --color-primary-dark: #5532e6;
+    --color-ink: #0e0b26;
+    --color-body: #3b3757;
+    --color-muted: #6e6a8a;
+    --color-page: #f7f6fc;
+    --color-noche: #0b0920;
+
+    --animate-entrada: entrada 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    --animate-aparecer: aparecer 0.4s ease-out both;
+    --animate-girar: girar 2.4s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+    --animate-flotar: flotar 7s ease-in-out infinite;
+    --animate-brillo: brillo 8s linear infinite;
+
+    @keyframes entrada {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: none; }
+    }
+    @keyframes aparecer {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes girar {
+        0%, 15% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(0.85); }
+        85%, 100% { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes flotar {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-18px) rotate(8deg); }
+    }
+    @keyframes brillo {
+        from { background-position: 0% 50%; }
+        to { background-position: 200% 50%; }
+    }
 }
 
-/* "accent" es el color del giro activo. Cada pantalla puede cambiarlo con style={{ '--accent': color }}
-   y todas las clases bg-accent, text-accent, border-accent, bg-accent/10... lo siguen. */
+/* "accent" es el color del giro activo (en el inicio, el violeta de la marca).
+   Cada pantalla puede cambiarlo con style={{ '--accent': color }} y todas las clases
+   bg-accent, text-accent, border-accent, bg-accent/10... lo siguen. */
 @theme inline {
-    --color-accent: var(--accent, #208b0b);
+    --color-accent: var(--accent, #6c47ff);
 }
 
 body {
     @apply bg-page font-sans text-body antialiased;
+}
+
+::selection {
+    background: color-mix(in srgb, var(--accent, #6c47ff) 25%, transparent);
+}
+
+/* Texto con degradado de la marca. */
+.texto-marca {
+    background: linear-gradient(90deg, #8b6cff, #22d3ee, #8b6cff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brillo 8s linear infinite;
+}
+
+/* Elementos que aparecen al hacer scroll (ver components/Reveal.tsx). */
+.revelar {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.revelar.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .revelar {
+        opacity: 1;
+        transform: none;
+    }
 }
